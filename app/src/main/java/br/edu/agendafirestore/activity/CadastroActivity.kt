@@ -8,6 +8,8 @@ import android.widget.EditText
 import android.widget.Toast
 import br.edu.agendafirestore.model.Contato
 import br.edu.agendafirestore.R
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class CadastroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +32,8 @@ class CadastroActivity : AppCompatActivity() {
             val email = findViewById<EditText>(R.id.editTextEmail).text.toString()
 
             val c = Contato( nome, fone, email)
-
+            val db = Firebase.firestore
+            db.collection("contatos").add(c)
 
             Toast.makeText(this,"Contato Inserido", Toast.LENGTH_LONG).show()
             finish()
